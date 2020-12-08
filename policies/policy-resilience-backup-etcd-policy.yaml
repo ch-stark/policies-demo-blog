@@ -341,4 +341,4 @@ spec:
     type: ManagedClusterConditionAvailable
   clusterSelector:
     matchExpressions:
-      - {key: local-cluster_disable, operator: In, values: ["true"]}
+      - {key: local-cluster, operator: In, values: ["true"]}
