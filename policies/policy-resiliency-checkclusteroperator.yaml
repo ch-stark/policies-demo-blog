@@ -39,9 +39,9 @@ spec:
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
-  name: binding-policy-checkclusteroperator
+  name: binding-checkclusteroperator
 placementRef:
-  name: placement-policy-checkclusteroperator
+  name: placement-checkclusteroperator
   kind: PlacementRule
   apiGroup: apps.open-cluster-management.io
 subjects:
@@ -52,7 +52,7 @@ subjects:
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  name: placement-policy-checkclusteroperator
+  name: placement-checkclusteroperator
 spec:
   clusterSelector:
     matchLabels:
