@@ -65,7 +65,7 @@ spec:
                         htpasswd:
                           fileData:
                             name: htpass-secret
-            - complianceType: mustonlyhave
+            - complianceType: mustnothave
               objectDefinition:
                 apiVersion: config.openshift.io/v1
                 kind: OAuth
