@@ -1,0 +1,14 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: policy-subscription
+  namespace: policies
+  labels:
+    app: policies-demo
+  annotations:
+    apps.open-cluster-management.io/github-path: policies
+    apps.open-cluster-management.io/github-branch: master
+spec:
+  channel: policies/policies
+  placement:
+   local: true

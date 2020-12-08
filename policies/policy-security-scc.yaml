@@ -1,0 +1,91 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-scc-cnf
+  annotations:
+    policy.open-cluster-management.io/standards: NIST-CSF
+    policy.open-cluster-management.io/categories: PR.IP Information Protection Processes and Procedures
+    policy.open-cluster-management.io/controls: PR.IP-1 Baseline Configuration
+spec:
+  remediationAction: inform
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-scc-cnf
+        spec:
+          remediationAction: inform
+          severity: low
+          namespaceSelector:
+            exclude:
+              - kube-*
+            include:
+              - default
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                kind: SecurityContextConstraints
+                apiVersion: security.openshift.io/v1
+                metadata:
+                  name: cnf-catalog-1
+                users: []
+                groups: []
+                priority: null
+                allowHostDirVolumePlugin: false
+                allowHostIPC: false
+                allowHostNetwork: false
+                allowHostPID: false
+                allowHostPorts: false
+                allowPrivilegeEscalation: true
+                allowPrivilegedContainer: false
+                allowedCapabilities: null
+                defaultAddCapabilities: null
+                requiredDropCapabilities:
+                  - KILL
+                  - MKNOD
+                  - SETUID
+                  - SETGID
+                  - NET_RAW
+                fsGroup:
+                  type: MustRunAs
+                readOnlyRootFilesystem: false
+                runAsUser:
+                  type: MustRunAsRange
+                seLinuxContext:
+                  type: MustRunAs
+                supplementalGroups:
+                  type: RunAsAny
+                volumes:
+                  - configMap
+                  - downwardAPI
+                  - emptyDir
+                  - persistentVolumeClaim
+                  - projected
+                  - secret
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-policy-scc-cnf
+placementRef:
+  name: placement-policy-scc-cnf
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: policy-scc-cnf
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: placement-policy-scc-cnf
+spec:
+  clusterConditions:
+  - status: "True"
+    type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - {key: name, operator: In, values: ["local-cluster"]}

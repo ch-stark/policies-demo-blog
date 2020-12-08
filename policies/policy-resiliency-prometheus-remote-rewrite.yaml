@@ -1,0 +1,61 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: prometheus-remote-rewrite
+  annotations:
+    policy.open-cluster-management.io/standards: NIST SP 800-53
+    policy.open-cluster-management.io/categories: CM Configuration Management
+    policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
+spec:
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: prometheus-remote-rewrite
+        spec:
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: v1
+                kind: ConfigMap
+                metadata:
+                  namespace: openshift-monitoring
+                  name: cluster-monitoring-config
+                data:
+                  config.yaml: |
+                    prometheusK8s:
+                      remoteWrite:
+                      - url: "http://my-cluster-kafka-bootstrap.openshift-operators.svc:9092/receive-topic"
+                        writeRelabelConfigs:
+                        - sourceLabels: [__name__, namespace]
+                          action: keep
+                          regex: "node_cpu_seconds_total;openshift-monitoring"
+          severity: high
+  remediationAction: inform
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-prometheus-remote-rewrite
+placementRef:
+  name: placement-prometheus-remote-rewrite
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: prometheus-remote-rewrite
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: placement-prometheus-remote-rewrite
+spec:
+  clusterConditions:
+  - status: "True"
+    type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - {key: name, operator: In, values: ["local-cluster"]}
