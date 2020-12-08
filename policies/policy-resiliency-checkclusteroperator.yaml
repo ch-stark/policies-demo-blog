@@ -57,6 +57,5 @@ spec:
   clusterSelector:
     matchLabels:
       name: local-cluster
-      monitoring: true
 
 
