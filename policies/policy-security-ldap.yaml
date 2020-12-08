@@ -51,7 +51,7 @@ spec:
                       mappingMethod: claim
                       name: ldap
                       type: LDAP
-            - complianceType: musthave
+            - complianceType: mustonlyhave
               objectDefinition:
                 apiVersion: config.openshift.io/v1
                 kind: OAuth
