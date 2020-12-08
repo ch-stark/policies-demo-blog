@@ -2,7 +2,6 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: policy-remove-kubeadmin
-  namespace: default
   annotations:
     policy.open-cluster-management.io/standards: NIST-CSF
     policy.open-cluster-management.io/categories: PR.IP Information Protection Processes and Procedures
@@ -37,7 +36,6 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-remove-kubeadmin
-  namespace: default
 placementRef:
   name: placement-remove-kubeadmin
   kind: PlacementRule
@@ -51,7 +49,6 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   name: placement-remove-kubeadmin
-  namespace: default
 spec:
   clusterConditions:
   - status: "True"
