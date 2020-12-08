@@ -57,4 +57,4 @@ spec:
     type: ManagedClusterConditionAvailable
   clusterSelector:
     matchExpressions:
-      - {key: namedisable, operator: In, values: ["local-cluster"]}
+      - {key: name, operator: In, values: ["local-cluster"]}
