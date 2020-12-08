@@ -8,7 +8,7 @@ metadata:
     policy.open-cluster-management.io/categories: CM Configuration Management
     policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
 spec:
-  remediationAction: inform
+  remediationAction: enforce
   disabled: false
   policy-templates:
     - objectDefinition:
@@ -17,7 +17,7 @@ spec:
         metadata:
           name: policy-logging-namespace-operators
         spec:
-          remediationAction: inform
+          remediationAction: enforce
           severity: low
           namespaceSelector:
             exclude:
@@ -41,7 +41,7 @@ spec:
         metadata:
           name: policy-logging-namespace-logging
         spec:
-          remediationAction: inform
+          remediationAction: enforce
           severity: low
           namespaceSelector:
             exclude:
@@ -65,7 +65,7 @@ spec:
         metadata:
           name: policy-logging-operatorgroup-es
         spec:
-          remediationAction: inform
+          remediationAction: enforce
           severity: low
           namespaceSelector:
             exclude:
@@ -87,7 +87,7 @@ spec:
         metadata:
           name: policy-logging-subscription-es
         spec:
-          remediationAction: inform
+          remediationAction: enforce
           severity: low
           namespaceSelector:
             exclude:
@@ -114,7 +114,7 @@ spec:
         metadata:
           name: policy-logging-operatorgroup
         spec:
-          remediationAction: inform
+          remediationAction: enforce
           severity: low
           namespaceSelector:
             exclude:
@@ -138,7 +138,7 @@ spec:
         metadata:
           name: policy-logging-subscription
         spec:
-          remediationAction: inform
+          remediationAction: enforce
           severity: low
           namespaceSelector:
             exclude:
@@ -164,7 +164,7 @@ spec:
         metadata:
           name: policy-logging-instance
         spec:
-          remediationAction: inform
+          remediationAction: enforce
           severity: low
           namespaceSelector:
             exclude:

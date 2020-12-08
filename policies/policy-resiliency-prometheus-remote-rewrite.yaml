@@ -33,7 +33,7 @@ spec:
                           action: keep
                           regex: "node_cpu_seconds_total;openshift-monitoring"
           severity: high
-  remediationAction: inform
+  remediationAction: enforce
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding

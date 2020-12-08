@@ -6,9 +6,9 @@ metadata:
     policy.open-cluster-management.io/standards: NIST SP 800-53
     policy.open-cluster-management.io/categories: CM Configuration Management
     policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
-    donotenforce: true
+    donotinform: true
 spec:
-  remediationAction: enforce
+  remediationAction: inform
   disabled: false
   policy-templates:
     - objectDefinition:
@@ -17,7 +17,7 @@ spec:
         metadata:
           name: enable-etcd-encryption-status-openshift
         spec:
-          remediationAction: enforce
+          remediationAction: inform
           severity: low
           namespaceSelector:
             exclude:
@@ -42,7 +42,7 @@ spec:
         metadata:
           name: enable-etcd-encryption-status-kube
         spec:
-          remediationAction: enforce
+          remediationAction: inform
           severity: low
           namespaceSelector:
             exclude:

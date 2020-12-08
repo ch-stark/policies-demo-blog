@@ -8,7 +8,7 @@ metadata:
     policy.open-cluster-management.io/categories: PR.IP Information Protection Processes and Procedures
     policy.open-cluster-management.io/controls: PR.IP-1 Baseline Configuration
 spec:
-  remediationAction: inform
+  remediationAction: enforce
   disabled: false
   policy-templates:
     - objectDefinition:
@@ -17,7 +17,7 @@ spec:
         metadata:
           name: backup-etcd-policy-sa
         spec:
-          remediationAction: inform # will be overridden by remediationAction in parent policy
+          remediationAction: enforce # will be overridden by remediationAction in parent policy
           severity: low
           namespaceSelector:
             exclude: ["kube-*"]
@@ -36,7 +36,7 @@ spec:
         metadata:
           name: backup-etcd-policy-crb
         spec:
-          remediationAction: inform # will be overridden by remediationAction in parent policy
+          remediationAction: enforce # will be overridden by remediationAction in parent policy
           severity: low
           namespaceSelector:
             exclude: ["kube-*"]
@@ -62,7 +62,7 @@ spec:
         metadata:
           name: backup-etcd-policy-pvc
         spec:
-          remediationAction: inform # will be overridden by remediationAction in parent policy
+          remediationAction: enforce # will be overridden by remediationAction in parent policy
           severity: low
           namespaceSelector:
             exclude: ["kube-*"]
@@ -88,7 +88,7 @@ spec:
         metadata:
           name: backup-etcd-policy-cm
         spec:
-          remediationAction: inform # will be overridden by remediationAction in parent policy
+          remediationAction: enforce # will be overridden by remediationAction in parent policy
           severity: low
           namespaceSelector:
             exclude: ["kube-*"]
@@ -210,7 +210,7 @@ spec:
         metadata:
           name: backup-etcd-policy-job
         spec:
-          remediationAction: inform # will be overridden by remediationAction in parent policy
+          remediationAction: enforce # will be overridden by remediationAction in parent policy
           severity: low
           namespaceSelector:
             exclude: ["kube-*"]

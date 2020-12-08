@@ -7,7 +7,7 @@ metadata:
     policy.open-cluster-management.io/categories: PR.IP Information Protection Processes and Procedures
     policy.open-cluster-management.io/controls: PR.IP-1 Baseline Configuration
 spec:
-  remediationAction: inform
+  remediationAction: enforce
   disabled: false
   policy-templates:
     - objectDefinition:
@@ -16,7 +16,7 @@ spec:
         metadata:
           name: policy-enableclusterlogforwarder
         spec:
-          remediationAction: inform
+          remediationAction: enforce
           severity: low
           namespaceSelector:
             exclude:
