@@ -394,8 +394,8 @@ spec:
                           - DaemonSet
                           - Deployment
                           - StatefulSet
-                  namespaces:
-                    - default
+                    namespaces:
+                      - default
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
