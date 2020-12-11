@@ -1,6 +1,3 @@
-# This policy assumes that the Compliance Operator is installed and running on
-# the managed clusters. It deploys a scan that will check the master and worker
-# nodes and verifies for compliance with the E8 (Essential 8) security profile.
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
@@ -10,7 +7,7 @@ metadata:
     policy.open-cluster-management.io/categories: CM Configuration Management
     policy.open-cluster-management.io/controls: CM-6 Configuration Settings
 spec:
-  remediationAction: enforce
+  remediationAction: inform
   disabled: false
   policy-templates:
     - objectDefinition:
@@ -18,25 +15,24 @@ spec:
         kind: ScanSettingBinding
         metadata:
           name: e8
-          namespace: openshift-compliance 
+          namespace: openshift-compliance
         profiles:
-        - apiGroup: compliance.openshift.io/v1alpha1
-          kind: Profile
-          name: ocp4-e8
-        - apiGroup: compliance.openshift.io/v1alpha1
-          kind: Profile
-          name: rhcos4-e8
+          - apiGroup: compliance.openshift.io/v1alpha1
+            kind: Profile
+            name: ocp4-e8
+          - apiGroup: compliance.openshift.io/v1alpha1
+            kind: Profile
+            name: rhcos4-e8
         settingsRef:
           apiGroup: compliance.openshift.io/v1alpha1
           kind: ScanSetting
           name: default
-          
-     
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-policy-e8-scan
+  namespace: default
 placementRef:
   name: placement-policy-e8-scan
   kind: PlacementRule
@@ -50,10 +46,11 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   name: placement-policy-e8-scan
+  namespace: default
 spec:
   clusterConditions:
   - status: "True"
     type: ManagedClusterConditionAvailable
   clusterSelector:
     matchExpressions:
-      - {key: vendor, operator: In, values: ["OpenShift"]}
+      - {key: name, operator: In, values: ["local-cluster"]}
