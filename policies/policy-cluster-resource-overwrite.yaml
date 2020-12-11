@@ -1,0 +1,86 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-cluster-resource-overwrite-operator
+  annotations:
+    policy.open-cluster-management.io/standards: NIST-CSF
+    policy.open-cluster-management.io/categories: PR.IP Information Protection Processes and Procedures
+    policy.open-cluster-management.io/controls: PR.IP-1 Baseline Configuration
+spec:
+  remediationAction: enforce
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-cluster-resource-overwrite-operator
+        spec:
+          remediationAction: inform
+          severity: low
+          namespaceSelector:
+            exclude:
+              - kube-*
+            include:
+              - default
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: operators.coreos.com/v1alpha1
+                kind: Subscription
+                metadata:
+                  namespace: cluster-resource-overwrite
+                  labels:
+                    operators.coreos.com/clusterresourceoverride.cluster-resource-overwrite: ''
+                spec:
+                  channel: '4.6'
+                  installPlanApproval: Automatic
+                  name: clusterresourceoverride
+                  source: redhat-operators
+                  sourceNamespace: openshift-marketplace
+                  startingCSV: clusterresourceoverride-operator.4.6.0-202011181111.p0
+            - complianceType: musthave
+              objectDefinition:      
+                 apiVersion: operator.autoscaling.openshift.io/v1
+                 kind: ClusterResourceOverride
+                 metadata:
+                   name: cluster
+                 spec:
+                   podResourceOverride:
+                     spec:
+                       cpuRequestToLimitPercent: 25
+                       limitCPUToMemoryPercent: 200
+                       memoryRequestToLimitPercent: 50
+            - complianceType: musthave
+              objectDefinition:
+                kind: Namespace
+                apiVersion: v1
+                metadata:
+                   name: cluster-resource-overwrite-example
+                   labels:
+                     clusterresourceoverrides.admission.autoscaling.openshift.io/enabled: "true"
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-cluster-resource-overwrite-operator
+placementRef:
+  name: placement-cluster-resource-overwrite-operator
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: policy-cluster-resource-overwrite-operator
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: placement-cluster-resource-overwrite-operator
+spec:
+  clusterConditions:
+  - status: "True"
+    type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - {key: local-cluster, operator: In, values: ["true"]}
