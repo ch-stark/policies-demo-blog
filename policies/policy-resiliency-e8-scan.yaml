@@ -32,7 +32,6 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-policy-e8-scan
-  namespace: default
 placementRef:
   name: placement-policy-e8-scan
   kind: PlacementRule
@@ -46,7 +45,6 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   name: placement-policy-e8-scan
-  namespace: default
 spec:
   clusterConditions:
   - status: "True"
