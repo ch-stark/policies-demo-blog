@@ -2,6 +2,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: policy-e8-scan
+  namespace: policies
   annotations:
     policy.open-cluster-management.io/standards: NIST SP 800-53, NIST-CSF
     policy.open-cluster-management.io/categories: CM Configuration Management, PR.IP Information Protection Processes and Procedures
@@ -24,32 +25,28 @@ spec:
           object-templates:
             - complianceType: musthave
               objectDefinition:
-                spec:
-                  remediationAction: inform
-                  disabled: false
-                  policy-templates:
-                    - objectDefinition:
-                        apiVersion: compliance.openshift.io/v1alpha1
-                        kind: ScanSettingBinding
-                        metadata:
-                          name: e8
-                          namespace: openshift-compliance
-                        profiles:
-                        - apiGroup: compliance.openshift.io/v1alpha1
-                          kind: Profile
-                          name: ocp4-e8
-                        - apiGroup: compliance.openshift.io/v1alpha1
-                          kind: Profile
-                          name: rhcos4-e8
-                        settingsRef:
-                          apiGroup: compliance.openshift.io/v1alpha1
-                          kind: ScanSetting
-                          name: default
+                apiVersion: compliance.openshift.io/v1alpha1
+                kind: ScanSettingBinding
+                metadata:
+                  name: e8
+                  namespace: openshift-compliance
+                profiles:
+                  - apiGroup: compliance.openshift.io/v1alpha1
+                    kind: Profile
+                    name: ocp4-e8
+                  - apiGroup: compliance.openshift.io/v1alpha1
+                    kind: Profile
+                    name: rhcos4-e8
+                settingsRef:
+                  apiGroup: compliance.openshift.io/v1alpha1
+                  kind: ScanSetting
+                  name: default
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-policy-e8-scan
+  namespace: policies
 placementRef:
   name: placement-policy-e8-scan
   kind: PlacementRule
@@ -63,6 +60,7 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   name: placement-policy-e8-scan
+  namespace: policies
 spec:
   clusterConditions:
   - status: "True"
