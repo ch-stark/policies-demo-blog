@@ -30,9 +30,8 @@ spec:
                 kind: ManagedCluster
                 metadata:
                   labels:
-                    name: sample-du-cluster
-                    profile: du
-                  name: sample-du-cluster
+                    profile: demo
+                  name: local-cluster
                 spec:
                   hubAcceptsClient: true
 ---
