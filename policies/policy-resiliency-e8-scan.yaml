@@ -18,6 +18,7 @@ spec:
         kind: ScanSettingBinding
         metadata:
           name: e8
+          namespace: openshift-compliance 
         profiles:
         - apiGroup: compliance.openshift.io/v1alpha1
           kind: Profile
@@ -29,6 +30,8 @@ spec:
           apiGroup: compliance.openshift.io/v1alpha1
           kind: ScanSetting
           name: default
+          
+     
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
