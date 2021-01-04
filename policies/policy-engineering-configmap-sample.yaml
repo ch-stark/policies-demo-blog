@@ -27,11 +27,11 @@ spec:
             - complianceType: musthave
               objectDefinition:
                 kind: ConfigMap
-		apiVersion: v1
+                apiVersion: v1
                 metadata:
-		  name: example-configmap
+                 name: example-configmap
                 data:
-		  application.properties: |-
+                  application.properties: |-
                     globalkey = global key value
                     TeamName = Team Name value
                     Purpose = Purpose value
