@@ -26,31 +26,31 @@ spec:
           object-templates:
             - complianceType: musthave
               objectDefinition:
-	            kind: ConfigMap
-	            apiVersion: v1
-	            metadata:
-		      name: example-configmap
-		    data:
-		      application.properties: |-
-		        globalkey = global key value
-		        TeamName = Team Name value
-		        Purpose = Purpose value
-		        RootFile = Root file value
-		        Company = company value
-		        Place = Place value
-		        Country = Country value
-		      application-qa.properties: |-
-		        spring.profiles = qa
-		        globalkey = global key qa value
-		        TeamName = Team Name qa value
-		        Purpose = Purpose qa value
-		        RootFile = Root file qa value
-		      application-prod.properties: |-
-		        spring.profiles = prod
-		        globalkey = global key prod value
-		        Company = company prod value
-		        Place = Place prod value
-		        Country = Country prod value
+	        kind: ConfigMap
+	        apiVersion: v1
+	        metadata:
+		  name: example-configmap
+		data:
+		  application.properties: |-
+		    globalkey = global key value
+		    TeamName = Team Name value
+		    Purpose = Purpose value
+		    RootFile = Root file value
+		    Company = company value
+		    Place = Place value
+		    Country = Country value
+		  application-qa.properties: |-
+		    spring.profiles = qa
+		    globalkey = global key qa value
+		    TeamName = Team Name qa value
+		    Purpose = Purpose qa value
+		    RootFile = Root file qa value
+		  application-prod.properties: |-
+		    spring.profiles = prod
+		    globalkey = global key prod value
+		    Company = company prod value
+		    Place = Place prod value
+		    Country = Country prod value
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
