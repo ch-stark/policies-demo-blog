@@ -25,10 +25,10 @@ spec:
               - default
           object-templates:
             - complianceType: musthave
-	      objectDefinition:
-	        kind: ConfigMap
-	        apiVersion: v1
-	        metadata:
+              objectDefinition:
+                kind: ConfigMap
+		apiVersion: v1
+                metadata:
 		  name: example-configmap
                 data:
 		  application.properties: |-
