@@ -26,18 +26,20 @@ spec:
           object-templates:
             - complianceType: musthave
               objectDefinition:
-                apiVersion: operators.coreos.com/v1alpha1
-                kind: Subscription
-                metadata:
-                  namespace: cluster-resource-overwrite
-                  labels:
-                    operators.coreos.com/clusterresourceoverride.cluster-resource-overwrite: ''
-                spec:
-                  channel: '4.6'
-                  installPlanApproval: Automatic
-                  name: clusterresourceoverride
-                  source: redhat-operators
-                  sourceNamespace: openshift-marketplace
+		apiVersion: operators.coreos.com/v1alpha1
+		kind: Subscription
+		metadata:
+		  labels:
+		    operators.coreos.com/clusterresourceoverride.cluster-resource-overwrite: ""
+		  name: clusterresourceoverride
+		  namespace: cluster-resource-overwrite
+		spec:
+		  channel: "4.6"
+		  installPlanApproval: Automatic
+		  name: clusterresourceoverride
+		  source: redhat-operators
+		  sourceNamespace: openshift-marketplace
+		  startingCSV: clusterresourceoverride-operator.4.6.0-202012161211.p0
             - complianceType: musthave
               objectDefinition:      
                  apiVersion: operator.autoscaling.openshift.io/v1
