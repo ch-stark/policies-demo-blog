@@ -65,9 +65,7 @@ spec:
                 kind: Namespace
                 apiVersion: v1
                 metadata:
-                   name: cluster-resource-overwrite  
-
- 
+                   name: cluster-resource-overwrite
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
