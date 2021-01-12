@@ -38,7 +38,6 @@ spec:
                   name: clusterresourceoverride
                   source: redhat-operators
                   sourceNamespace: openshift-marketplace
-                  startingCSV: clusterresourceoverride-operator.4.6.0-202011181111.p0
             - complianceType: musthave
               objectDefinition:      
                  apiVersion: operator.autoscaling.openshift.io/v1
