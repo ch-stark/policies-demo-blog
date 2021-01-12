@@ -7,7 +7,7 @@ metadata:
     policy.open-cluster-management.io/categories: CM Configuration Management
     policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
 spec:
-  remediationAction: enforce
+  remediationAction: inform
   disabled: false
   policy-templates:
   - objectDefinition:
@@ -82,7 +82,7 @@ spec:
                 name: gatekeeper-operator-sub
                 namespace: openshift-gatekeeper-operator
               spec:
-                channel: alpha
+                channel: stable
                 name: gatekeeper-operator
                 source: gatekeeper-operator
                 sourceNamespace: openshift-gatekeeper-operator
@@ -136,4 +136,4 @@ spec:
     type: ManagedClusterConditionAvailable
   clusterSelector:
     matchExpressions:
-       - {key: name, operator: In, values: ["local-cluster"]}
+      - {key: environment, operator: In, values: ["dev"]}
