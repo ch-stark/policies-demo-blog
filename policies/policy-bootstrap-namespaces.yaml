@@ -59,7 +59,15 @@ spec:
                 kind: Namespace
                 apiVersion: v1
                 metadata:
-                   name: openshift-logging      
+                   name: openshift-logging  
+            - complianceType: musthave
+              objectDefinition:
+                kind: Namespace
+                apiVersion: v1
+                metadata:
+                   name: cluster-resource-overwrite  
+
+ 
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
