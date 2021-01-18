@@ -7,7 +7,7 @@ metadata:
     app: policies-demo
   annotations:
     apps.open-cluster-management.io/github-path: policies
-    apps.open-cluster-management.io/github-branch: master
+    apps.open-cluster-management.io/github-branch: main
 spec:
   channel: policies/policies
   placement:
